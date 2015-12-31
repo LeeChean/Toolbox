@@ -102,4 +102,43 @@ public static class ObjectExtend
         }
         return dTemp;
     }
+
+
+    /// <summary>
+    /// 字符串截取
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="length"></param>
+    /// <param name="ext"></param>
+    /// <returns></returns>
+    public static string SubStr(this string value, int length, string ext = "")
+    {
+        //扩展方法不会出现null
+        if (null == value)
+            return string.Empty;
+        StringBuilder tmp = new StringBuilder();
+        double c = 0.5;
+        int strLen = value.Length;
+        for (int i = 0; i < strLen; i++)
+        {
+            char ch = value[i];
+            int t = (int)ch;
+            if (t >= 0 && t <= 128)
+            {
+                c += 0.5;
+            }
+            else
+            {
+                c += 1;
+            }
+            if (c > length)
+            {
+                tmp.Append(ext);
+                break;
+            }
+            tmp.Append(ch);
+        }
+
+        return tmp.ToString();
+    }
 }
